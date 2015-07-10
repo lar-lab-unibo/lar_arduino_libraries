@@ -11,7 +11,9 @@ void setup(){
   servo_right.init(motor11);
 }
 
-
+int target = 0;
+int current = 0;
+int vel = 10;
 
 void loop()
 {
@@ -35,11 +37,24 @@ void loop()
         servo_left.setMicroseconds(s.toInt());
         servo_right.setMicroseconds(s.toInt());
       }else{
-        servo_left.setAngle(s.toInt());
-        servo_right.setAngle(s.toInt());
+        target = s.toInt();
+        
+        
+        
+        
+       
       }
     }
+    
   }
+  if(abs(current-target)>0){
+          current += vel * (target-current)/abs(current-target);
+        }else{
+          current = target;
+          }
+  Serial.println(current);
+    servo_left.setAngle(current);
+    servo_right.setAngle(current);
 
   delay(100);
 }
