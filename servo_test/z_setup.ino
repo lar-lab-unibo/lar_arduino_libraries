@@ -7,8 +7,8 @@ bool calibration_mode = false;
 void setup(){
   Serial.begin(9600);
 
-  servo_left.init(motor7);
-  servo_right.init(motor11);
+  servo_left.init(motor5); // 180 -> 90
+  servo_right.init(motor17); // 0 -> 180
 }
 
 int target = 0;
@@ -34,20 +34,25 @@ void loop()
       Serial.print("Received: ");
       Serial.println(s.toInt());
       if(calibration_mode){
-        servo_left.setMicroseconds(s.toInt());
+        //servo_left.setMicroseconds(s.toInt());
         servo_right.setMicroseconds(s.toInt());
       }else{
-        target = s.toInt();
-        
-        
-        
-        
-       
+        //servo_left.setAngle(s.toInt());
+        float angle = s.toInt();
+        float angle2 = 180-angle;
+        servo_left.setAngle(angle2);
+        servo_right.setAngle(angle);
+        //target = s.toInt();
+
+
+
+
+
       }
     }
-    
+
   }
-  if(abs(current-target)>0){
+/*  if(abs(current-target)>0){
           current += vel * (target-current)/abs(current-target);
         }else{
           current = target;
@@ -55,6 +60,6 @@ void loop()
   Serial.println(current);
     servo_left.setAngle(current);
     servo_right.setAngle(current);
-
+*/
   delay(100);
 }

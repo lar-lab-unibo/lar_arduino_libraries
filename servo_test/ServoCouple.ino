@@ -56,3 +56,5 @@ typedef struct IServo{
 //Calbirated MOTORS
 IServoConfiguration motor7(875.0f,2000.0f);
 IServoConfiguration motor11(860.0f,1985.0f);
+IServoConfiguration motor5(860.0f,2130.0f);
+IServoConfiguration motor17(830.0f,2180.0f);
